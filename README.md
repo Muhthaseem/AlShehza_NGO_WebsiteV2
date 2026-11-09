@@ -74,3 +74,9 @@ npm run build:pages
 ```
 
 Keep `.env` files, credentials, `node_modules/`, and generated build folders out of Git; the included `.gitignore` covers them.
+
+## Theme and language controls
+
+The header includes a light/dark toggle. Light is the default; the visitor's choice is saved on their device. Dark mode applies before hydration to avoid a light flash on returning visits.
+
+The searchable language picker suggests languages from browser preferences and time-zone settings. Choosing a non-English language opens the public page in Google Translate in a new tab. No API key or embedded Google script is used. Google cannot fetch localhost or private sign-in-only pages: use browser translation in local preview and verify Google translation after public deployment. The nonprofit Website Translator widget can be considered separately if Google approves the foundation's eligibility.
