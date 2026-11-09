@@ -46,3 +46,9 @@
 @keyframes photo-zoom{from{transform:scale(1)}to{transform:scale(1.078)}}
 @starting-style{.programme-image .project-slides img.is-active{transform:scale(1)}}
 @media(prefers-reduced-motion:reduce){.hero-slide-current img{animation:none!important;transform:none}.hero-slide-previous,.programme-image .project-slides img,.programme-image .project-slides img.is-active,.programme:hover .programme-image .project-slides img{transform:none!important;transition:none!important}}
+/* Keep the establishment badge and its lettering comfortably inside the photo. */
+.story-main{object-position:30% center}
+.story-stamp{width:136px;height:136px;right:18px;top:22px;padding:15px 12px;gap:5px;text-align:center;box-shadow:0 5px 20px #163e3518}
+.story-stamp strong{font-size:35px;line-height:1.1}
+.story-stamp span{font-size:7px;letter-spacing:.9px;line-height:1.5;flex-shrink:0}
+@media(max-width:760px){.story-stamp{width:120px;height:120px;right:14px;top:18px;padding:12px 10px;gap:4px}.story-stamp strong{font-size:30px}.story-stamp span{font-size:6.5px;letter-spacing:.7px}}
