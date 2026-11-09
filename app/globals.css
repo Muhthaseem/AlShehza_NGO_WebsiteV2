@@ -52,3 +52,18 @@
 .story-stamp strong{font-size:35px;line-height:1.1}
 .story-stamp span{font-size:7px;letter-spacing:.9px;line-height:1.5;flex-shrink:0}
 @media(max-width:760px){.story-stamp{width:120px;height:120px;right:14px;top:18px;padding:12px 10px;gap:4px}.story-stamp strong{font-size:30px}.story-stamp span{font-size:6.5px;letter-spacing:.7px}}
+
+/* More prominent leadership and contact details. */
+.founder{gap:17px;padding-top:28px;align-items:center}
+.founder-initials{width:62px;height:62px;flex-shrink:0;font-size:21px}
+.founder div{min-width:0;gap:7px}
+.founder div strong{font-size:19px;line-height:1.3}
+.founder div span{font-size:14px;line-height:1.5}
+.founder-email{font-size:14px;line-height:1.6;overflow-wrap:anywhere;text-decoration:underline;text-underline-offset:3px}
+.contact-card>.eyebrow{font-size:11px}
+.contact-row{gap:18px;padding:29px 0}
+.contact-row>span{font-size:17px;line-height:1.6;gap:8px}
+.contact-row small{font-size:10px;line-height:1.6;letter-spacing:1.1px}
+.contact-row>svg:first-child{width:27px;height:27px}
+@media(max-width:760px){.contact-row>span{font-size:16px}.contact-row small{font-size:10px}.founder div strong{font-size:18px}}
+@media(max-width:450px){.founder{gap:12px}.founder-initials{width:54px;height:54px;font-size:19px}.founder div span,.founder-email{font-size:13px}.contact-row{gap:12px}.contact-row>span{font-size:15px}.contact-row small{font-size:9px}.contact-row>svg:last-child{width:16px}}
