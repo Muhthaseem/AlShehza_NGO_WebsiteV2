@@ -25,6 +25,17 @@ export default function HeaderPreferences() {
 
   useEffect(() => {
     setDark(document.documentElement.dataset.theme === "dark");
+    // Google website translation may indicate its language in the proxy URL.
+    const html = document.documentElement;
+    const translatedLanguage = new URLSearchParams(window.location.search).get("_x_tr_tl");
+    if (translatedLanguage && /^[a-z]{2,3}(?:-[a-zA-Z]{2,8})*$/.test(translatedLanguage)) html.lang = translatedLanguage;
+    const syncDirection = () => {
+      const language = html.lang.toLowerCase().split("-")[0];
+      html.dir = ["ar", "fa", "he", "ur", "ps", "ku", "yi", "sd", "dv"].includes(language) ? "rtl" : "ltr";
+    };
+    syncDirection();
+    const directionObserver = new MutationObserver(syncDirection);
+    directionObserver.observe(html, { attributes: true, attributeFilter: ["lang"] });
     const sync = (event: StorageEvent) => {
       if (event.key !== "al-shehza-theme") return;
       const next = event.newValue === "dark";
@@ -40,7 +51,7 @@ export default function HeaderPreferences() {
     const zone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const regional = zone === "Asia/Colombo" ? ["si", "ta", "en"] : /Asia\/(Kolkata|Calcutta)/.test(zone) ? ["hi", "ta", "en"] : /Asia\/(Dubai|Riyadh|Qatar|Kuwait|Bahrain|Muscat)/.test(zone) ? ["ar", "en", "ur"] : ["en", "si", "ta"];
     setSuggested(Array.from(new Set([...browser, ...regional])).slice(0, 6));
-    return () => window.removeEventListener("storage", sync);
+    return () => { window.removeEventListener("storage", sync); directionObserver.disconnect(); };
   }, []);
 
   useEffect(() => {

@@ -58,9 +58,9 @@ export default function HeroSlideshow() {
       <div key={frame.sequence} className="hero-slide-current"><img src={slide.src} alt="" fetchPriority={frame.sequence === 0 ? "high" : "auto"}/></div>
     </div>
     <div className="photo-shade"/>
-    <span className="image-label"><span className="dot"/>COMPASSION, IN EVERYDAY LIFE</span>
+    <div className="hero-overlay-top"><span className="image-label"><span className="dot"/>COMPASSION, IN EVERYDAY LIFE</span>
     <div className="hero-slide-category" aria-live={running ? "off" : "polite"} aria-atomic="true">{slide.label}</div>
-    <div className="hero-photo-caption"><span>Every act of care.<br/>A shared humanity.</span><a href="#work" aria-label="Explore our programmes"><ArrowUpRight size={28}/></a></div>
-    <div className="floating-note"><HeartHandshake size={27} strokeWidth={1.4}/><span>Compassion in action.<br/><strong>Dignity for all.</strong></span></div>
+    </div><div className="hero-overlay-bottom"><div className="floating-note"><HeartHandshake size={27} strokeWidth={1.4}/><span>Compassion in action.<br/><strong>Dignity for all.</strong></span></div>
+    <div className="hero-photo-caption"><span>Every act of care.<br/>A shared humanity.</span><a href="#work" aria-label="Explore our programmes"><ArrowUpRight size={28}/></a></div></div>
   </div>;
 }
