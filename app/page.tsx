@@ -1,4 +1,5 @@
 "use client";
+import { assetPath } from "../lib/site-assets";
 import ProjectSlideshow from '../components/project-slideshow';
 import HeroSlideshow from '../components/hero-slideshow';
 import {useState,useEffect,useRef} from 'react';
@@ -15,7 +16,7 @@ const programmes=[
 ];
 const categories=['All programmes','Water access','Food & nourishment','Seasonal giving','Learning support'];
 const gallery=[{image:'tube_well_donation/20.png',caption:'Household tube-well programme'},{image:'iftar_food_donation/1.png',caption:'Preparing meals for Iftar'},{image:'rice_bag_donation/9.png',caption:'Rice assistance for households'},{image:'nutrient_yoghurt_donation/16.png',caption:'Food support for children'}];
-const photo=(name:string)=>`/images/${name.replace(/\.(png|jpe?g)$/i,'.webp')}`;
+const photo=(name:string)=>assetPath(`/images/${name.replace(/\.(png|jpe?g)$/i,'.webp')}`);
 
 export default function Home(){
  const [menu,setMenu]=useState(false),[filter,setFilter]=useState('All programmes'),[expanded,setExpanded]=useState<number|null>(null),[lightbox,setLightbox]=useState<number|null>(null);

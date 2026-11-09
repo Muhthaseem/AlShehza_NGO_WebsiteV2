@@ -1,4 +1,5 @@
 "use client";
+import { assetPath } from "../lib/site-assets";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -12,8 +13,8 @@ const photoNumbers: Record<string, number[]> = {
 
 export default function ProjectSlideshow({ image, category, title }: { image: string; category: string; title: string }) {
   const folder = image.split("/")[0];
-  const images = (photoNumbers[folder] ?? [Number(image.split("/")[1].split(".")[0])]).map(n => `/images/${folder}/${n}.webp`);
-  const initial = Math.max(0, images.indexOf(`/images/${image.replace(/\.(png|jpe?g)$/i, ".webp")}`));
+  const images = (photoNumbers[folder] ?? [Number(image.split("/")[1].split(".")[0])]).map(n => assetPath(`/images/${folder}/${n}.webp`));
+  const initial = Math.max(0, images.indexOf(assetPath(`/images/${image.replace(/\.(png|jpe?g)$/i, ".webp")}`)));
   const [frame, setFrame] = useState({ index: initial, revision: 0 });
   const [visible, setVisible] = useState(false);
   const root = useRef<HTMLDivElement>(null);
@@ -33,7 +34,7 @@ export default function ProjectSlideshow({ image, category, title }: { image: st
   const select = useCallback(async (index: number) => {
     const ticket = ++request.current;
     const next = new Image();
-    next.src = `/images/${folder}/${photoNumbers[folder]?.[index] ?? Number(image.split("/")[1].split(".")[0])}.webp`;
+    next.src = assetPath(`/images/${folder}/${photoNumbers[folder]?.[index] ?? Number(image.split("/")[1].split(".")[0])}.webp`);
     try { await next.decode(); } catch { return; }
     if (mounted.current && ticket === request.current) setFrame(old => ({ index, revision: old.revision + 1 }));
   }, [folder, image]);

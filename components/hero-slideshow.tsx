@@ -1,4 +1,5 @@
 "use client";
+import { assetPath } from "../lib/site-assets";
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowUpRight, HeartHandshake } from "lucide-react";
@@ -11,7 +12,7 @@ const groups = [
   { folder: "community_water_well_donation", numbers: [12], label: "Community water facilities" },
 ];
 // Interleave programmes so every part of the foundation's work appears early.
-const slides = Array.from({ length: 12 }, (_, i) => groups.flatMap(group => group.numbers[i] === undefined ? [] : [{ ...group, src: `/images/${group.folder}/${group.numbers[i]}.webp` }])).flat();
+const slides = Array.from({ length: 12 }, (_, i) => groups.flatMap(group => group.numbers[i] === undefined ? [] : [{ ...group, src: assetPath(`/images/${group.folder}/${group.numbers[i]}.webp`) }])).flat();
 const duration = 4000;
 
 export default function HeroSlideshow() {
