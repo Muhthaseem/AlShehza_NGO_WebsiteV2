@@ -43,7 +43,7 @@ export default function ProjectSlideshow({ image, category, title }: { image: st
     const next = (frame.index + 1) % images.length;
     const preload = new Image();
     preload.src = images[next];
-    const timer = window.setTimeout(() => void select(next), 3000);
+    const timer = window.setTimeout(() => void select(next), 4000);
     return () => window.clearTimeout(timer);
   }, [visible, frame.index, frame.revision, folder, select, images.length]);
 

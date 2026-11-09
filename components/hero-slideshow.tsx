@@ -12,7 +12,7 @@ const groups = [
 ];
 // Interleave programmes so every part of the foundation's work appears early.
 const slides = Array.from({ length: 12 }, (_, i) => groups.flatMap(group => group.numbers[i] === undefined ? [] : [{ ...group, src: `/images/${group.folder}/${group.numbers[i]}.webp` }])).flat();
-const duration = 3000;
+const duration = 4000;
 
 export default function HeroSlideshow() {
   const [frame, setFrame] = useState({ current: 0, previous: 0, sequence: 0 });
