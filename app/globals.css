@@ -245,3 +245,15 @@ html[dir=rtl] .language-picker{right:auto;left:0}
 html[data-theme=dark] .hero-atmosphere{--dust-colour:#a5cc90}
 @media(max-width:760px){.hero-dust:nth-of-type(3n){display:none}}
 @media(prefers-reduced-motion:reduce){.hero-dust{animation:none;opacity:.35}}
+
+/* Scroll-aware navigation with a smoothly travelling section indicator. */
+@media(min-width:1001px){header>nav{position:relative}}
+header nav .nav-section-link{transition:color .25s ease,background-color .25s ease}
+header nav .nav-section-link:after{display:none}
+header nav .nav-section-link.is-current{color:#377b54}
+.nav-current-marker{position:absolute;top:0;left:0;height:2px;border-radius:3px;background:#5b976c;pointer-events:none;transition:transform .32s cubic-bezier(.22,.61,.36,1),width .32s cubic-bezier(.22,.61,.36,1),opacity .2s ease}
+html[data-theme=dark] header nav .nav-section-link.is-current{color:#b4d5a9}
+html[data-theme=dark] .nav-current-marker{background:#b4d5a9}
+header nav .button[aria-current=location]{outline:2px solid #7da57c;outline-offset:4px}
+@media(max-width:1000px){.nav-current-marker{display:none}header nav .nav-section-link{padding:10px 13px;border-radius:5px}header nav .nav-section-link.is-current{background:#e3ecdf;box-shadow:inset 3px 0 #5b976c}html[data-theme=dark] header nav .nav-section-link.is-current{background:#29382d}html[dir=rtl] header nav .nav-section-link.is-current{box-shadow:inset -3px 0 #5b976c}}
+@media(prefers-reduced-motion:reduce){.nav-current-marker,header nav .nav-section-link{transition:none}}
