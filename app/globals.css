@@ -257,3 +257,77 @@ html[data-theme=dark] .nav-current-marker{background:#b4d5a9}
 header nav .button[aria-current=location]{outline:2px solid #7da57c;outline-offset:4px}
 @media(max-width:1000px){.nav-current-marker{display:none}header nav .nav-section-link{padding:10px 13px;border-radius:5px}header nav .nav-section-link.is-current{background:#e3ecdf;box-shadow:inset 3px 0 #5b976c}html[data-theme=dark] header nav .nav-section-link.is-current{background:#29382d}html[dir=rtl] header nav .nav-section-link.is-current{box-shadow:inset -3px 0 #5b976c}}
 @media(prefers-reduced-motion:reduce){.nav-current-marker,header nav .nav-section-link{transition:none}}
+
+/* Readable supporting type across desktop, mobile, and translated layouts. */
+.topbar{font-size:12px}
+header>nav{font-size:15px}
+header nav .nav-section-link{font-size:15px;line-height:1.7}
+.button,.button.small{font-size:14px;line-height:1.7}
+.text-link{font-size:14px;line-height:1.8}
+.eyebrow,.programme .eyebrow{font-size:12px;letter-spacing:1.2px;line-height:1.8}
+.programme .eyebrow{color:#52715a}
+html[data-theme=dark] .programme .eyebrow{color:#b5cfa9}
+.programme-content>p{font-size:15px;line-height:1.85}
+.programme-more{font-size:14px;padding-top:19px;min-height:44px}
+.filters button{font-size:13px;min-height:44px;padding:11px 17px;line-height:1.6}
+.filters button span{font-size:11px}
+.programme-image>.project-category{font-size:12px;padding:7px 11px;line-height:1.65}
+.programme-symbol span{font-size:12px;letter-spacing:1.2px;line-height:1.8;text-align:center;padding-inline:18px}
+.purpose-strip>span,.purpose-strip>div{font-size:14px;line-height:1.8}
+.work-footnote{font-size:13px;line-height:1.8}
+.hero-note{font-size:13px;line-height:1.8}
+.hero-overlay-top .image-label{font-size:11px;letter-spacing:1.2px;line-height:1.8}
+.hero-overlay-top .hero-slide-category{font-size:13px;line-height:1.8}
+.hero-overlay-bottom .floating-note{font-size:13px}
+.hero-overlay-bottom .floating-note>span,.hero-overlay-bottom .floating-note strong{font-size:14px;line-height:1.8}
+.story-image-note{font-size:14px;line-height:1.85}
+.values p{font-size:14px;line-height:1.9}
+.gallery button span{font-size:14px;line-height:1.8;align-items:center}
+.gallery button span svg{width:19px;height:19px}
+.lightbox figcaption{font-size:14px;line-height:1.8}
+.quote-section>span{font-size:11px;letter-spacing:1.5px;line-height:1.8}
+.contact-card>p{font-size:13px!important;line-height:1.85}
+footer .footer-top>p{font-size:14px;line-height:1.9}
+.footer-top>div,.back-top{font-size:14px;line-height:1.9}
+.footer-top>div a{padding-block:3px}
+.footer-bottom{font-size:13px;line-height:1.9;color:#afc2b5;row-gap:15px}
+.language-results strong,.language-search input{font-size:14px}
+.language-results small{font-size:12px;line-height:1.7}
+.language-group-label{font-size:11px;line-height:1.7}
+.language-heading p,.language-message,.language-empty{font-size:13px;line-height:1.8}
+.language-footer{font-size:12px;line-height:1.7}
+.language-footer small{font-size:11px;line-height:1.7}
+@media(max-width:1000px){header nav .nav-section-link{font-size:16px;min-height:46px}header nav .button.small{font-size:15px;min-height:46px}}
+@media(max-width:760px){.programme .eyebrow{font-size:12px;letter-spacing:1px}.programme-content>p{font-size:15px}.programme-more{font-size:14px}.gallery button span{font-size:14px}.footer-bottom{font-size:13px}.hero-overlay-bottom .floating-note{padding:17px;gap:12px}.hero-overlay-bottom .floating-note>span,.hero-overlay-bottom .floating-note strong{font-size:13px}.purpose-strip>div{font-size:14px}}
+@media(max-width:400px){.hero-overlay-top .image-label{font-size:11px;letter-spacing:.8px}.hero-overlay-bottom .floating-note{padding:14px}.filters button{padding-inline:13px}.footer-top>p,.footer-top>div{font-size:14px}}
+
+/* A contact directory with separate foundation, leadership, and address blocks. */
+.contact-section.contact-redesign{display:block}
+.contact-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8%;align-items:end;margin-bottom:38px}
+.contact-intro>*{min-width:0}
+.contact-intro-copy p{font-size:15px;line-height:1.9;color:var(--muted);max-width:430px;margin:0 0 24px}
+.contact-directory{--contact-surface:#fff;--contact-soft:#edf1e7;--contact-accent:#e8efdf}
+.contact-directory-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+.contact-panel{background:var(--contact-surface);border:1px solid var(--line);border-radius:8px;padding:30px;min-width:0;display:flex;flex-direction:column}
+.contact-panel-heading,.contact-address-heading{display:flex;align-items:center;gap:17px;min-width:0}
+.contact-panel-heading>div,.contact-address-heading>div{min-width:0}
+.contact-panel-icon,.contact-panel-initials{width:52px;height:52px;display:grid;place-items:center;background:var(--contact-accent);border-radius:50%;flex-shrink:0;color:var(--green)}
+.contact-panel-initials{font:600 19px Manrope,sans-serif;color:var(--ink)}
+.contact-panel-heading .eyebrow,.contact-address-heading .eyebrow{font-size:11px;letter-spacing:1px;line-height:1.8}
+.contact-panel-heading h3,.contact-address-heading h3{font-size:24px;line-height:1.4;letter-spacing:-.6px;margin:5px 0 0}
+.contact-panel-description{font-size:14px;line-height:1.85;color:var(--muted);margin:22px 0 25px;max-width:430px}
+.contact-detail-link{display:flex;align-items:center;gap:15px;border-top:1px solid var(--line);padding:20px 0;min-width:0;line-height:1.8;transition:color .2s}
+.contact-detail-link:last-child{padding-bottom:0}
+.contact-detail-link>span{display:flex;flex:1;min-width:0;flex-direction:column;gap:5px}
+.contact-detail-link small{color:var(--muted);font-size:11px;letter-spacing:.8px;line-height:1.8}
+.contact-detail-link bdi{font-size:16px;font-weight:500;overflow-wrap:anywhere}
+.contact-detail-link>svg:last-child{margin-inline-start:auto}
+.contact-detail-link:hover{color:var(--green)}
+.contact-address-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px;align-items:center;background:var(--contact-soft);border:1px solid var(--line);border-inline-start:3px solid #83a47b;border-radius:8px;padding:27px 30px;margin-top:24px}
+.contact-address-panel address{font-size:19px;line-height:1.8;font-style:normal;margin:0;min-width:0}
+.contact-address-panel address>span{font-size:16px;color:var(--muted)}
+html[data-theme=dark] .contact-directory{--contact-surface:#242829;--contact-soft:#222626;--contact-accent:#2d3e31}
+html:not(:lang(en)) :is(.contact-panel-heading,.contact-address-heading) .eyebrow{letter-spacing:normal}
+@media(max-width:900px){.contact-panel{padding:25px}.contact-detail-link{gap:12px}.contact-detail-link bdi{font-size:15px}.contact-panel-heading h3{font-size:22px}}
+@media(max-width:650px){.contact-intro,.contact-directory-cards,.contact-address-panel{grid-template-columns:minmax(0,1fr)}.contact-intro{gap:24px;margin-bottom:30px}.contact-intro-copy p{max-width:none}.contact-directory-cards{gap:18px}.contact-panel{padding:25px}.contact-address-panel{padding:24px;margin-top:18px;gap:20px}.contact-address-panel address{padding-inline-start:69px;font-size:18px}.contact-address-panel address>span{font-size:16px}}
+@media(max-width:400px){.contact-panel{padding:21px}.contact-panel-heading{gap:13px}.contact-panel-heading h3{font-size:21px}.contact-panel-heading .eyebrow{font-size:10px}.contact-panel-icon,.contact-panel-initials{width:46px;height:46px}.contact-detail-link{gap:10px}.contact-detail-link>svg:last-child{width:16px}.contact-address-panel{padding:21px}.contact-address-panel address{padding-inline-start:0}}
