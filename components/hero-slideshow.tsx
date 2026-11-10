@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "./language-provider";
 import { assetPath } from "../lib/site-assets";
 
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -16,6 +17,8 @@ const slides = Array.from({ length: 12 }, (_, i) => groups.flatMap(group => grou
 const duration = 4000;
 
 export default function HeroSlideshow() {
+ const { t } = useLanguage();
+
   const [frame, setFrame] = useState({ current: 0, previous: 0, sequence: 0 });
   const [visible, setVisible] = useState(true);
   const root = useRef<HTMLDivElement>(null);
@@ -52,15 +55,15 @@ export default function HeroSlideshow() {
     return () => window.clearTimeout(timer);
   }, [frame.current, frame.sequence, running, move]);
 
-  return <div ref={root} className={`hero-visual hero-slideshow ${running ? "is-playing" : "is-paused"}`} role="region" aria-roledescription="carousel" aria-label="Foundation project photographs">
+  return <div ref={root} className={`hero-visual hero-slideshow ${running ? "is-playing" : "is-paused"}`} role="region" aria-roledescription="carousel" aria-label={t("Foundation project photographs")}>
     <div className="hero-slides" aria-hidden="true">
       <img className="hero-slide-previous" src={slides[frame.previous].src} alt=""/>
       <div key={frame.sequence} className="hero-slide-current"><img src={slide.src} alt="" fetchPriority={frame.sequence === 0 ? "high" : "auto"}/></div>
     </div>
     <div className="photo-shade"/>
-    <div className="hero-overlay-top"><span className="image-label"><span className="dot"/>COMPASSION, IN EVERYDAY LIFE</span>
-    <div className="hero-slide-category" aria-live={running ? "off" : "polite"} aria-atomic="true">{slide.label}</div>
-    </div><div className="hero-overlay-bottom"><div className="floating-note"><HeartHandshake size={27} strokeWidth={1.4}/><span>Together, we care.<br/><strong>Together, we make a difference.</strong></span></div>
-    <div className="hero-photo-caption"><span>Every act of care.<br/>A shared humanity.</span><a href="#work" aria-label="Explore our programmes"><ArrowUpRight size={28}/></a></div></div>
+    <div className="hero-overlay-top"><span className="image-label"><span className="dot"/>{t("COMPASSION, IN EVERYDAY LIFE")}</span>
+    <div className="hero-slide-category" aria-live={running ? "off" : "polite"} aria-atomic="true">{t(slide.label)}</div>
+    </div><div className="hero-overlay-bottom"><div className="floating-note"><HeartHandshake size={27} strokeWidth={1.4}/><span>{t("Together, we care.")}<br/><strong>{t("Together, we make a difference.")}</strong></span></div>
+    <div className="hero-photo-caption"><span>{t("Every act of care.")}<br/>{t("A shared humanity.")}</span><a href="#work" aria-label={t("Explore our programmes")}><ArrowUpRight size={28}/></a></div></div>
   </div>;
 }

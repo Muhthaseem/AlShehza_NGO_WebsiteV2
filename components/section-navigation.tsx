@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "./language-provider";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { ArrowUpRight } from "lucide-react";
@@ -7,6 +8,8 @@ const sections = ["home", "work", "story", "community", "contact"];
 const links = [{ id: "work", label: "Our work" }, { id: "story", label: "Our story" }, { id: "community", label: "In the community" }];
 
 export default function SectionNavigation({ open, onNavigate }: { open: boolean; onNavigate: () => void }) {
+ const { t } = useLanguage();
+
   const [active, setActive] = useState("home");
   const [marker, setMarker] = useState({ left: 0, top: 0, width: 0 });
   const nav = useRef<HTMLElement>(null);
@@ -54,9 +57,9 @@ export default function SectionNavigation({ open, onNavigate }: { open: boolean;
     return () => observer.disconnect();
   }, [active, open]);
 
-  return <nav ref={nav} id="navigation" className={open ? "open" : ""} aria-label="Main navigation">
-    {links.map(link => <a key={link.id} className={`nav-section-link ${active === link.id ? "is-current" : ""}`} href={`#${link.id}`} aria-current={active === link.id ? "location" : undefined} onClick={onNavigate}>{link.label}</a>)}
-    <a className="button small" href="#contact" aria-current={active === "contact" ? "location" : undefined} onClick={onNavigate}>Get involved <ArrowUpRight size={16}/></a>
+  return <nav ref={nav} id="navigation" className={open ? "open" : ""} aria-label={t("Main navigation")}>
+    {links.map(link => <a key={link.id} className={`nav-section-link ${active === link.id ? "is-current" : ""}`} href={`#${link.id}`} aria-current={active === link.id ? "location" : undefined} onClick={onNavigate}>{t(link.label)}</a>)}
+    <a className="button small" href="#contact" aria-current={active === "contact" ? "location" : undefined} onClick={onNavigate}>{t("Get involved")} <ArrowUpRight size={16}/></a>
     <span className="nav-current-marker" aria-hidden="true" style={{ width: marker.width, opacity: marker.width ? 1 : 0, transform: `translate3d(${marker.left}px,${marker.top}px,0)` }}/>
   </nav>;
 }

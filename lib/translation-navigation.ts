@@ -30,15 +30,22 @@ export function getTranslationContext(href: string) {
 export function getTranslationDestination(href: string, language: string) {
   if (!/^[a-z]{2,3}(?:-[a-zA-Z]{2,8})*$/.test(language)) throw new Error("Invalid language code.");
   const context = getTranslationContext(href);
-  if (language === "en") return context.originalUrl;
+  if (language === "en" || language === "ta" || language === "si") {
+    const original = new URL(context.originalUrl);
+    if (language !== "en" || original.searchParams.has("lang")) original.searchParams.set("lang", language);
+    return original.href;
+  }
   const current = new URL(href);
   if (isProxy(current)) {
     // Stay on the same translated page; change its language instead of nesting proxies.
     current.searchParams.set("_x_tr_sl", "en");
     current.searchParams.set("_x_tr_tl", language);
+    if (current.searchParams.has("lang")) current.searchParams.set("lang", "en");
     return current.href;
   }
   const target = new URL("https://translate.google.com/translate");
-  target.search = new URLSearchParams({ sl: "en", tl: language, hl: "en", u: context.originalUrl }).toString();
+  const source = new URL(context.originalUrl);
+  if (source.searchParams.has("lang")) source.searchParams.set("lang", "en");
+  target.search = new URLSearchParams({ sl: "en", tl: language, hl: "en", u: source.href }).toString();
   return target.href;
 }

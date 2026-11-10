@@ -1,4 +1,5 @@
 "use client";
+import { useLanguage } from "./language-provider";
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, Check, Languages, Moon, Search, Sun, X } from "lucide-react";
@@ -15,6 +16,8 @@ const languages = codes.map(code => {
 const normalise = (value: string) => value.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 
 export default function HeaderPreferences() {
+ const { t, language: localLanguage, setLanguage } = useLanguage();
+
   const [dark, setDark] = useState(false);
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
@@ -24,6 +27,10 @@ export default function HeaderPreferences() {
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const search = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    try { if (!getTranslationContext(window.location.href).translated) setActiveLanguage(localLanguage); } catch { setActiveLanguage(localLanguage); }
+  }, [localLanguage]);
 
   useEffect(() => {
     setDark(document.documentElement.dataset.theme === "dark");
@@ -81,7 +88,21 @@ export default function HeaderPreferences() {
 
   function translate(code: string) {
     const url = new URL(window.location.href);
-    if (code === activeLanguage) { setMessage(`You’re already viewing this page in ${englishNames.of(code)}.`); return; }
+    if (code === activeLanguage) { setMessage("This language is already selected."); return; }
+    if (code === "en" || code === "ta" || code === "si") {
+      const context = getTranslationContext(url.href);
+      if (context.translated) {
+        const original = new URL(context.originalUrl);
+        original.searchParams.set("lang", code);
+        window.location.assign(original.href);
+      } else {
+        setLanguage(code);
+        setActiveLanguage(code);
+        setOpen(false);
+        setQuery("");
+      }
+      return;
+    }
     if (url.hostname === "localhost" || url.hostname === "127.0.0.1" || url.hostname === "[::1]") {
       setMessage("Google needs a public website URL to translate this page. This will work after the website is published. For local preview, use your browser’s Translate option.");
       return;
@@ -98,8 +119,8 @@ export default function HeaderPreferences() {
   const item = (language: typeof languages[number]) => <li key={language.code}><button type="button" onClick={() => translate(language.code)} aria-pressed={language.code === activeLanguage}><span><strong>{language.name}</strong><small lang={language.code}>{language.native}</small></span>{language.code === activeLanguage ? <Check size={15}/> : <ArrowRight size={13}/>}</button></li>;
 
   return <div className="header-preferences notranslate" translate="no" ref={root} onBlur={event => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }}>
-    <button type="button" className="preference-button theme-toggle" onClick={toggleTheme} aria-label={dark ? "Switch to light theme" : "Switch to dark theme"} aria-pressed={dark} title={dark ? "Light theme" : "Dark theme"}>{dark ? <Sun size={19}/> : <Moon size={19}/>}</button>
-    <button type="button" ref={trigger} className={`preference-button language-toggle ${open ? "selected" : ""}`} onClick={() => { setOpen(!open); setQuery(""); setMessage(""); }} aria-label="Choose website language" aria-expanded={open} aria-controls="language-picker" aria-haspopup="dialog" title="Choose language"><Languages size={19}/><span>{activeLanguage.split("-")[0].toUpperCase()}</span></button>
-    {open && <div id="language-picker" className="language-picker" role="dialog" aria-label="Choose a language"><div className="language-heading"><div><strong>Choose your language</strong><p>Explore our work in your language.</p></div><button type="button" onClick={() => { setOpen(false); trigger.current?.focus(); }} aria-label="Close language selector"><X size={17}/></button></div><label className="language-search"><Search size={16}/><input ref={search} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder="Search languages…" aria-label="Search languages" autoComplete="off"/></label><div className="language-results">{!query.trim() && <><p className="language-group-label">SUGGESTED FOR YOU</p><ul>{recommendations.map(item)}</ul></>}<p className="language-group-label">{query.trim() ? `${matches.length} LANGUAGES FOUND` : "ALL LANGUAGES"}</p><ul>{matches.map(item)}</ul>{matches.length === 0 && <p className="language-empty">No matching languages. Try another name.</p>}</div>{message && <p className="language-message" role="status">{message}</p>}<div className="language-footer"><span>Translation via Google Translate</span><small>Switch languages in this tab, including back to English.</small></div></div>}
+    <button type="button" className="preference-button theme-toggle" onClick={toggleTheme} aria-label={dark ? t("Switch to light theme") : t("Switch to dark theme")} aria-pressed={dark} title={dark ? t("Light theme") : t("Dark theme")}>{dark ? <Sun size={19}/> : <Moon size={19}/>}</button>
+    <button type="button" ref={trigger} className={`preference-button language-toggle ${open ? "selected" : ""}`} onClick={() => { setOpen(!open); setQuery(""); setMessage(""); }} aria-label={t("Choose website language")} aria-expanded={open} aria-controls="language-picker" aria-haspopup="dialog" title={t("Choose language")}><Languages size={19}/><span>{activeLanguage.split("-")[0].toUpperCase()}</span></button>
+    {open && <div id="language-picker" className="language-picker" role="dialog" aria-label={t("Choose a language")}><div className="language-heading"><div><strong>{t("Choose your language")}</strong><p>{t("Explore our work in your language.")}</p></div><button type="button" onClick={() => { setOpen(false); trigger.current?.focus(); }} aria-label={t("Close language selector")}><X size={17}/></button></div><label className="language-search"><Search size={16}/><input ref={search} type="search" value={query} onChange={event => setQuery(event.target.value)} placeholder={t("Search languages…")} aria-label={t("Search languages")} autoComplete="off"/></label><div className="language-results">{!query.trim() && <><p className="language-group-label">{t("SUGGESTED FOR YOU")}</p><ul>{recommendations.map(item)}</ul></>}<p className="language-group-label">{query.trim() ? `${matches.length} ${t("LANGUAGES FOUND")}` : t("ALL LANGUAGES")}</p><ul>{matches.map(item)}</ul>{matches.length === 0 && <p className="language-empty">{t("No matching languages. Try another name.")}</p>}</div>{message && <p className="language-message" role="status">{t(message)}</p>}<div className="language-footer"><span>{t("Tamil and Sinhala are available on this site. Other languages use Google Translate.")}</span><small>{t("Switch languages in this tab, including back to English.")}</small></div></div>}
   </div>;
 }
