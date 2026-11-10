@@ -331,3 +331,19 @@ html:not(:lang(en)) :is(.contact-panel-heading,.contact-address-heading) .eyebro
 @media(max-width:900px){.contact-panel{padding:25px}.contact-detail-link{gap:12px}.contact-detail-link bdi{font-size:15px}.contact-panel-heading h3{font-size:22px}}
 @media(max-width:650px){.contact-intro,.contact-directory-cards,.contact-address-panel{grid-template-columns:minmax(0,1fr)}.contact-intro{gap:24px;margin-bottom:30px}.contact-intro-copy p{max-width:none}.contact-directory-cards{gap:18px}.contact-panel{padding:25px}.contact-address-panel{padding:24px;margin-top:18px;gap:20px}.contact-address-panel address{padding-inline-start:69px;font-size:18px}.contact-address-panel address>span{font-size:16px}}
 @media(max-width:400px){.contact-panel{padding:21px}.contact-panel-heading{gap:13px}.contact-panel-heading h3{font-size:21px}.contact-panel-heading .eyebrow{font-size:10px}.contact-panel-icon,.contact-panel-initials{width:46px;height:46px}.contact-detail-link{gap:10px}.contact-detail-link>svg:last-child{width:16px}.contact-address-panel{padding:21px}.contact-address-panel address{padding-inline-start:0}}
+
+
+/* A translucent, flowing ribbon of green light. */
+.hero-ribbon-background{--ribbon-rgb:109,159,115}
+.hero-ribbon-stage{position:absolute;inset:-35% -10%;transform:rotate(-28deg);opacity:.8}
+.hero-light-ribbon{position:absolute;inset:5% 32% -10% 8%;border-radius:48% 52% 30% 70%/55% 35% 65% 45%;background:linear-gradient(95deg,transparent 10%,rgba(var(--ribbon-rgb),.015) 27%,rgba(var(--ribbon-rgb),.17) 48%,rgba(var(--ribbon-rgb),.035) 62%,transparent 82%);filter:blur(7px);animation:hero-ribbon-flow 16s ease-in-out infinite alternate;transform-origin:50% 70%}
+.hero-light-ribbon-secondary{inset:-5% 18% 8% 29%;opacity:.6;animation-duration:21s;animation-delay:-9s;animation-direction:alternate-reverse;background:linear-gradient(100deg,transparent 15%,rgba(var(--ribbon-rgb),.025) 30%,rgba(var(--ribbon-rgb),.12) 51%,transparent 73%)}
+@keyframes hero-ribbon-flow{0%{transform:translate3d(-7%,3%,0) skewX(-12deg) scaleX(.85)}50%{transform:translate3d(4%,-1%,0) skewX(3deg) scaleX(1.05)}100%{transform:translate3d(12%,-4%,0) skewX(13deg) scaleX(1.15)}}
+html[data-theme=dark] .hero-ribbon-background{--ribbon-rgb:136,184,145}
+@media(max-width:760px){.hero-ribbon-stage{inset:-10% -50%;opacity:.65}.hero-light-ribbon{filter:blur(5px)}}
+@media(prefers-reduced-motion:reduce){.hero-light-ribbon{animation:none}}
+/* Compact hero slogan card. */
+.hero-overlay-bottom .floating-note{padding:12px 16px;gap:10px;line-height:1.6}
+.hero-overlay-bottom .floating-note>svg{width:22px;height:22px}
+.hero-overlay-bottom .floating-note>span,.hero-overlay-bottom .floating-note strong{font-size:12px;line-height:1.65}
+@media(max-width:760px){.hero-overlay-bottom .floating-note{padding:10px 13px;gap:9px}.hero-overlay-bottom .floating-note>svg{width:20px;height:20px}}
